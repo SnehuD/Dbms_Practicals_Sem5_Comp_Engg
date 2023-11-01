@@ -1,0 +1,17 @@
+// Simple Index
+db.visitors.createIndex( {
+    name: 1
+} ) ; 
+
+// Compound Index
+db.visitors.createIndex( {
+    name: 1 , 
+    age: 1 , 
+    city: 1
+} ) ; 
+
+// Unique Index
+db.visitors.createIndex( {
+    name: 1 , 
+    city: 1 ,
+} , { unique: true } ) ;

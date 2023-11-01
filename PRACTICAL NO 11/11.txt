@@ -1,0 +1,53 @@
+
+1. Insert sample data into the "visitors" collection:
+
+```javascript
+db.visitors.insertMany([
+  { name: "Alice", country: "USA" },
+  { name: "Bob", country: "Canada" },
+  { name: "Charlie", country: "USA" },
+  { name: "David", country: "Canada" },
+  { name: "Eve", country: "UK" },
+]);
+```
+
+2. Define the Map and Reduce functions (as JavaScript functions):
+
+```javascript
+// Map function
+var mapFunction = function() {
+  emit(this.country, 1);
+};
+
+// Reduce function
+var reduceFunction = function(key, values) {
+  return Array.sum(values);
+};
+```
+
+3. Execute the MapReduce operation and store the result in a new collection "visitor_country_count":
+
+```javascript
+var mapReduceOptions = {
+  out: "visitor_country_count" // Output collection
+};
+
+db.visitors.mapReduce(mapFunction, reduceFunction, mapReduceOptions);
+
+
+db.visitors.aggregate([
+  {
+    $group: {
+      _id: "$country",
+      count: { $sum: 1 },
+    },
+  },
+]);
+
+```
+
+4. Query the result in the "visitor_country_count" collection:
+
+```javascript
+db.visitor_country_count.find();
+```

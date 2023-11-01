@@ -1,0 +1,99 @@
+db.createCollection( "visitors" ) ;
+db.visitors.insertOne( 
+    {
+        "name": "Shubham" , 
+        "age": 19 ,
+        "city": "Pune" ,
+    } , 
+) ; 
+db.visitors.insertMany( [  
+    {
+        "name": "Kaustubh" , 
+        "age": 23 ,
+        "city": "Jalgaon" ,
+    } , 
+    {
+        "name": "Advait" , 
+        "age": 18 ,
+        "city": "Pune" ,
+    } , 
+    {
+        "name": "Swaraj" , 
+        "age": 22 ,
+        "city": "Pune" ,
+    } , 
+    {
+        "name": "Manthan" , 
+        "age": 21 ,
+        "city": "Pune" ,
+    } , 
+    {
+        "name": "Ayush" , 
+        "age": 20 ,
+        "city": "Chandrapur" ,
+    } , 
+] ) ; 
+
+
+
+db.visitors.find().pretty() ; 
+db.visitors.find( { 
+    "city": "Pune"
+} ); 
+
+db.visitors.find( 
+    {
+        $and: [
+            { "insem_marks": { $gt: 120 } } , 
+            { "endsem_marks": { $lt: 150 } }
+        ]
+    } , 
+    { "name": 1 , "year": 1 } // Projection
+) ;
+
+
+db.visitors.updateOne(
+    { "age": 22 } , 
+    { 
+        $set: {
+            "city": "Mumbai"
+        }
+    }
+) ; 
+
+
+db.visitors.deleteOne( 
+    { "city": "Chandrapur" } 
+) ; 
+
+db.blog.drop();
+
+db.visitors.countDocuments() ;
+
+db.visitors.estimatedDocumentCount() ; 
+
+db.visitors.find( {
+    $and: [
+        { "age": 21 } ,
+        { "city" : "Pune" } , 
+    ]
+} ) ;
+
+
+db.visitors.find( {
+    "age": { 
+        $gt: 22
+    }
+} ) ; 
+
+db.visitors.find( { 
+    "age": {
+        $in: [ 21, 22]
+    }
+} ) ; 
+
+db.visitors.find( {
+    "age" : {
+        $size: 1
+    }
+}) ; 

@@ -1,0 +1,18 @@
+Practical NO 08
+
+Problem Statement :- Write a program to implement MySQL oracle database connectivity
+with any front end language to implement database operations.
+
+
+Submitted By :- Snehal Ganesh Dahake.
+Roll No      :- 71
+
+
+
+
+
+
+
+
+
+-------------------------PRACTICAL NO 8-------------------------
