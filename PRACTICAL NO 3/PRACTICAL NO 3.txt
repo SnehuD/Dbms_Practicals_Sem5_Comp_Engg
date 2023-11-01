@@ -1,0 +1,742 @@
+Problem Statement :- Design at least 10 SQL queries for suitable database application using SQL DML statments:
+Insert,Update,Delete with operators,functions and set.
+
+Submitted By :- Snehal Ganesh Dahake 
+Roll No      :- 71
+
+
+SHOW DATABASES;
+
+create database museum;
+
+use museum;
+
+show databases;
+
+Create table visitor(vid integer (10),vname varchar(20),email varchar(20), mno int(10), payment int(10));
+
+desc visitor;
+
+INSERT INTO visitor(vid,vname, email,mno, payment) VALUES(1001,'Mrs.Snehal','snehu@gmail.com', 986068, 5000);
+
+INSERT INTO visitor(vid,vname, email,mno, payment) VALUES(1002,'Mr.Prasad','prasad@gmail.com',906740, 6000);
+
+INSERT INTO visitor(vid,vname, email,mno, payment) VALUES(1003,'Mrs.Harshu','harshu@gmail.com',900900, 7000);
+                                          ,                   
+INSERT INTO visitor(vid,vname, email,mno, payment) VALUES(1004,'Mr.Amar','amar@gmail.com',900800, 3000);
+
+select * from visitor;
+
+INSERT INTO visitor(vid,vname, email,mno, payment) VALUES(1005, 'Mrs. Sonu', 'sonu@gmail.com', 908070, 2000);
+
+desc visitor;
+
+select * from visitor;
+
+Create table booking( bid integer (10),Address varchar(15));
+
+desc booking;
+
+INSERT INTO booking(bid,Address) VALUES(50001,'Pune');
+
+INSERT INTO booking(bid,Address) VALUES(50002,'Nashik');
+
+INSERT INTO booking(bid,Address) VALUES(50003,'Mumbai');
+
+INSERT INTO booking(bid,Address) VALUES(50004,'Mumbai');
+
+INSERT INTO booking(bid,Address) VALUES(50005,'Mumbai');
+
+select * from booking;
+
+Create table security( sid integer (10), s_Type varchar(15) ,Address varchar(20), sName varchar(20));
+
+desc security;
+
+INSERT INTO security(sid,s_Type,Address,sName) VALUES(20,'Part time', 'Gondia','Pushpak');
+
+INSERT INTO security(sid,s_Type,Address,sName) VALUES(21,'Full time', 'Nashik','Rohan');
+
+INSERT INTO security(sid,s_Type,Address,sName) VALUES(22,'Part time', 'pune','Neha');
+
+INSERT INTO security(sid,s_Type,Address,sName) VALUES(23,'Full time', 'Mumbai','Janvi');
+
+INSERT INTO security(sid,s_Type,Address,sName) VALUES(24,'Part time', 'Delhi','Soham');
+
+select *from security;
+
+UPDATE visitor SET vName = 'Manu' WHERE vid =1001;
+
+select * from visitor;
+
+SELECT SUM(payment) FROM visitor;
+
+SELECT MAX(payment) FROM visitor;
+
+SELECT MIN(payment) FROM visitor;
+
+SELECT AVG(payment) FROM visitor;
+
+SELECT * FROM security WHERE Address='Pune';
+
+SELECT * FROM visitor  WHERE payment>5000;
+
+SELECT * FROM visitor  WHERE payment<5000;
+
+SELECT * FROM visitor  WHERE payment<6000;
+
+SELECT * FROM visitor WHERE payment<>7000;
+
+SELECT * FROM booking WHERE Address LIKE 'P%';
+
+SELECT * FROM booking WHERE Address LIKE '_________';
+
+SELECT * FROM booking WHERE Address LIKE '____ai';
+
+SELECT * FROM booking WHERE Address LIKE '_ai';
+
+SELECT * FROM booking WHERE Address LIKE '_ai';
+
+SELECT * FROM booking WHERE Address LIKE '_____';
+
+SELECT * FROM booking WHERE Address LIKE '%k';
+
+SELECT * FROM visitor WHERE vid BETWEEN 1002 AND 1004;
+
+SELECT * FROM visitor WHERE vid IN(1002,1004);
+
+SELECT s_Type AS sName FROM security;
+
+SELECT DISTINCT(s_Type) FROM security;
+
+SELECT email,SUM(payment) From visitor GROUP BY email;
+
+SELECT vname,SUM(payment) From visitor GROUP BY vname;
+
+SELECT vname,MAX(payment) From visitor GROUP BY vname;
+
+SELECT vname,MIN(payment) From visitor GROUP BY vname HAVING vname IN('Mrs.Snehal','Mrs.Harshu');
+
+SELECT Address FROM booking ORDER BY Address ASC;
+
+SELECT Address FROM booking ORDER BY Address DESC;
+
+ALTER TABLE security ADD Issue Integer(6);
+
+select * from security;
+
+UPDATE security SET Issue = 5;
+
+select * from security;
+
+UPDATE security SET Issue = 5;
+
+UPDATE security SET Issue = 3 WHERE Address = 'Nashik';
+
+UPDATE security SET Issue = 3 WHERE Address = 'Pune';
+
+DELETE FROM visitor WHERE vname='Mrs.Snehal';
+
+select * from visitor;
+
+select * from security;
+
+Create table Admin(aid integer(10),aname varchar(15),pwd integer(15));
+
+desc Admin;
+
+INSERT INTO Admin(aid,aname,pwd)VALUES(54321,'Snehal',8568952);
+
+INSERT INTO Admin(aid,aname,pwd)VALUES(54321,'Prasad',808765492);
+
+INSERT INTO Admin(aid,aname,pwd)VALUES(54321,'Shree',645872);
+
+INSERT INTO Admin(aid,aname,pwd)VALUES(54321,'Prasann',4687386);
+
+select * from Admin;
+
+SELECT sid FROM security UNION SELECT aid FROM Admin;
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------PRACTICAL NO 3-------------------------
+
+
+
+Enter password: *********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 12
+Server version: 8.1.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| collage            |
+| emp                |
+| employee           |
+| hostel             |
+| information_schema |
+| mysql              |
+| performance_schema |
+| student            |
+| sys                |
+| visitor            |
++--------------------+
+10 rows in set (0.00 sec)
+
+mysql> create database museum;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use museum;
+Database changed
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| collage            |
+| emp                |
+| employee           |
+| hostel             |
+| information_schema |
+| museum             |
+| mysql              |
+| performance_schema |
+| student            |
+| sys                |
+| visitor            |
++--------------------+
+11 rows in set (0.00 sec)
+
+mysql> Create table visitor(vid integer (10),vname varchar(20),email varchar(20), mno int(10), payment int(10));
+Query OK, 0 rows affected, 3 warnings (0.03 sec)
+
+mysql> desc visitor;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| vid     | int         | YES  |     | NULL    |       |
+| vname   | varchar(20) | YES  |     | NULL    |       |
+| email   | varchar(20) | YES  |     | NULL    |       |
+| mno     | int         | YES  |     | NULL    |       |
+| payment | int         | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> INSERT INTO visitor(vid,vname, email,mno, payment) VALUES(1001,'Mrs.Snehal','snehu@gmail.com', 986068, 5000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO visitor(vid,vname, email,mno, payment) VALUES(1002,'Mr.Prasad','prasad@gmail.com',906740, 6000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>
+mysql> INSERT INTO visitor(vid,vname, email,mno, payment) VALUES(1003,'Mrs.Harshu','harshu@gmail.com',900900, 7000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO visitor(vid,vname, email,mno, payment) VALUES(1004,'Mr.Amar','amar@gmail.com',900800, 3000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from visitor;
++------+------------+------------------+--------+---------+
+| vid  | vname      | email            | mno    | payment |
++------+------------+------------------+--------+---------+
+| 1001 | Mrs.Snehal | snehu@gmail.com  | 986068 |    5000 |
+| 1002 | Mr.Prasad  | prasad@gmail.com | 906740 |    6000 |
+| 1003 | Mrs.Harshu | harshu@gmail.com | 900900 |    7000 |
+| 1004 | Mr.Amar    | amar@gmail.com   | 900800 |    3000 |
++------+------------+------------------+--------+---------+
+4 rows in set (0.00 sec)
+
+mysql> INSERT INTO visitor(vid,vname, email,mno, payment) VALUES(1005, 'Mrs. Sonu', 'sonu@gmail.com', 908070, 2000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> desc visitor;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| vid     | int         | YES  |     | NULL    |       |
+| vname   | varchar(20) | YES  |     | NULL    |       |
+| email   | varchar(20) | YES  |     | NULL    |       |
+| mno     | int         | YES  |     | NULL    |       |
+| payment | int         | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from visitor;
++------+------------+------------------+--------+---------+
+| vid  | vname      | email            | mno    | payment |
++------+------------+------------------+--------+---------+
+| 1001 | Mrs.Snehal | snehu@gmail.com  | 986068 |    5000 |
+| 1002 | Mr.Prasad  | prasad@gmail.com | 906740 |    6000 |
+| 1003 | Mrs.Harshu | harshu@gmail.com | 900900 |    7000 |
+| 1004 | Mr.Amar    | amar@gmail.com   | 900800 |    3000 |
+| 1005 | Mrs. Sonu  | sonu@gmail.com   | 908070 |    2000 |
++------+------------+------------------+--------+---------+
+5 rows in set (0.00 sec)
+
+mysql> Create table booking( bid integer (10),Address varchar(15));
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> desc booking;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| bid     | int         | YES  |     | NULL    |       |
+| Address | varchar(15) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> INSERT INTO booking(bid,Address) VALUES(50001,'Pune');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO booking(bid,Address) VALUES(50002,'Nashik');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO booking(bid,Address) VALUES(50003,'Mumbai');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO booking(bid,Address) VALUES(50004,'Mumbai');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO booking(bid,Address) VALUES(50005,'Mumbai');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from booking;
++-------+---------+
+| bid   | Address |
++-------+---------+
+| 50001 | Pune    |
+| 50002 | Nashik  |
+| 50003 | Mumbai  |
+| 50004 | Mumbai  |
+| 50005 | Mumbai  |
++-------+---------+
+5 rows in set (0.00 sec)
+
+mysql> Create table security( sid integer (10), s_Type varchar(15) ,Address varchar(20), sName varchar(20));
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> desc security;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| sid     | int         | YES  |     | NULL    |       |
+| s_Type  | varchar(15) | YES  |     | NULL    |       |
+| Address | varchar(20) | YES  |     | NULL    |       |
+| sName   | varchar(20) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+
+mysql> INSERT INTO security(sid,s_Type,Address,sName) VALUES(20,'Part time', 'Gondia','Pushpak');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO security(sid,s_Type,Address,sName) VALUES(21,'Full time', 'Nashik','Rohan');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO security(sid,s_Type,Address,sName) VALUES(22,'Part time', 'pune','Neha');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO security(sid,s_Type,Address,sName) VALUES(23,'Full time', 'Mumbai','Janvi');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO security(sid,s_Type,Address,sName) VALUES(24,'Part time', 'Delhi','Soham');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select *from security;
++------+-----------+---------+---------+
+| sid  | s_Type    | Address | sName   |
++------+-----------+---------+---------+
+|   20 | Part time | Gondia  | Pushpak |
+|   21 | Full time | Nashik  | Rohan   |
+|   22 | Part time | pune    | Neha    |
+|   23 | Full time | Mumbai  | Janvi   |
+|   24 | Part time | Delhi   | Soham   |
++------+-----------+---------+---------+
+5 rows in set (0.00 sec)
+
+mysql> UPDATE visitor SET vName = 'Manu' WHERE vid =1001;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from visitor;
++------+------------+------------------+--------+---------+
+| vid  | vname      | email            | mno    | payment |
++------+------------+------------------+--------+---------+
+| 1001 | Manu       | snehu@gmail.com  | 986068 |    5000 |
+| 1002 | Mr.Prasad  | prasad@gmail.com | 906740 |    6000 |
+| 1003 | Mrs.Harshu | harshu@gmail.com | 900900 |    7000 |
+| 1004 | Mr.Amar    | amar@gmail.com   | 900800 |    3000 |
+| 1005 | Mrs. Sonu  | sonu@gmail.com   | 908070 |    2000 |
++------+------------+------------------+--------+---------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT SUM(payment) FROM visitor;
++--------------+
+| SUM(payment) |
++--------------+
+|        23000 |
++--------------+
+1 row in set (0.01 sec)
+
+mysql> SELECT MAX(payment) FROM visitor;
++--------------+
+| MAX(payment) |
++--------------+
+|         7000 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MIN(payment) FROM visitor;
++--------------+
+| MIN(payment) |
++--------------+
+|         2000 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT AVG(payment) FROM visitor;
++--------------+
+| AVG(payment) |
++--------------+
+|    4600.0000 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM security WHERE Address='Pune';
++------+-----------+---------+-------+
+| sid  | s_Type    | Address | sName |
++------+-----------+---------+-------+
+|   22 | Part time | pune    | Neha  |
++------+-----------+---------+-------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM visitor  WHERE payment>5000;
++------+------------+------------------+--------+---------+
+| vid  | vname      | email            | mno    | payment |
++------+------------+------------------+--------+---------+
+| 1002 | Mr.Prasad  | prasad@gmail.com | 906740 |    6000 |
+| 1003 | Mrs.Harshu | harshu@gmail.com | 900900 |    7000 |
++------+------------+------------------+--------+---------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM visitor  WHERE payment<5000;
++------+-----------+----------------+--------+---------+
+| vid  | vname     | email          | mno    | payment |
++------+-----------+----------------+--------+---------+
+| 1004 | Mr.Amar   | amar@gmail.com | 900800 |    3000 |
+| 1005 | Mrs. Sonu | sonu@gmail.com | 908070 |    2000 |
++------+-----------+----------------+--------+---------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM visitor  WHERE payment<6000;
++------+-----------+-----------------+--------+---------+
+| vid  | vname     | email           | mno    | payment |
++------+-----------+-----------------+--------+---------+
+| 1001 | Manu      | snehu@gmail.com | 986068 |    5000 |
+| 1004 | Mr.Amar   | amar@gmail.com  | 900800 |    3000 |
+| 1005 | Mrs. Sonu | sonu@gmail.com  | 908070 |    2000 |
++------+-----------+-----------------+--------+---------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM visitor WHERE payment<>7000;
++------+-----------+------------------+--------+---------+
+| vid  | vname     | email            | mno    | payment |
++------+-----------+------------------+--------+---------+
+| 1001 | Manu      | snehu@gmail.com  | 986068 |    5000 |
+| 1002 | Mr.Prasad | prasad@gmail.com | 906740 |    6000 |
+| 1004 | Mr.Amar   | amar@gmail.com   | 900800 |    3000 |
+| 1005 | Mrs. Sonu | sonu@gmail.com   | 908070 |    2000 |
++------+-----------+------------------+--------+---------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM booking WHERE Address LIKE 'P%';
++-------+---------+
+| bid   | Address |
++-------+---------+
+| 50001 | Pune    |
++-------+---------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM booking WHERE Address LIKE '_________';
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM booking WHERE Address LIKE '____ai';
++-------+---------+
+| bid   | Address |
++-------+---------+
+| 50003 | Mumbai  |
+| 50004 | Mumbai  |
+| 50005 | Mumbai  |
++-------+---------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM booking WHERE Address LIKE '_ai';
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM booking WHERE Address LIKE '_ai';
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM booking WHERE Address LIKE '_____';
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM booking WHERE Address LIKE '%k';
++-------+---------+
+| bid   | Address |
++-------+---------+
+| 50002 | Nashik  |
++-------+---------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM visitor WHERE vid BETWEEN 1002 AND 1004;
++------+------------+------------------+--------+---------+
+| vid  | vname      | email            | mno    | payment |
++------+------------+------------------+--------+---------+
+| 1002 | Mr.Prasad  | prasad@gmail.com | 906740 |    6000 |
+| 1003 | Mrs.Harshu | harshu@gmail.com | 900900 |    7000 |
+| 1004 | Mr.Amar    | amar@gmail.com   | 900800 |    3000 |
++------+------------+------------------+--------+---------+
+3 rows in set (0.00 sec)
+
+mysql>
+mysql> SELECT * FROM visitor WHERE vid IN(1002,1004);
++------+-----------+------------------+--------+---------+
+| vid  | vname     | email            | mno    | payment |
++------+-----------+------------------+--------+---------+
+| 1002 | Mr.Prasad | prasad@gmail.com | 906740 |    6000 |
+| 1004 | Mr.Amar   | amar@gmail.com   | 900800 |    3000 |
++------+-----------+------------------+--------+---------+
+2 rows in set (0.00 sec)
+
+
+mysql> SELECT s_Type AS sName FROM security;
++-----------+
+| sName     |
++-----------+
+| Part time |
+| Full time |
+| Part time |
+| Full time |
+| Part time |
++-----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT DISTINCT(s_Type) FROM security;
++-----------+
+| s_Type    |
++-----------+
+| Part time |
+| Full time |
++-----------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT email,SUM(payment) From visitor GROUP BY email;
++------------------+--------------+
+| email            | SUM(payment) |
++------------------+--------------+
+| snehu@gmail.com  |         5000 |
+| prasad@gmail.com |         6000 |
+| harshu@gmail.com |         7000 |
+| amar@gmail.com   |         3000 |
+| sonu@gmail.com   |         2000 |
++------------------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT vname,SUM(payment) From visitor GROUP BY vname;
++------------+--------------+
+| vname      | SUM(payment) |
++------------+--------------+
+| Manu       |         5000 |
+| Mr.Prasad  |         6000 |
+| Mrs.Harshu |         7000 |
+| Mr.Amar    |         3000 |
+| Mrs. Sonu  |         2000 |
++------------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT vname,MAX(payment) From visitor GROUP BY vname;
++------------+--------------+
+| vname      | MAX(payment) |
++------------+--------------+
+| Manu       |         5000 |
+| Mr.Prasad  |         6000 |
+| Mrs.Harshu |         7000 |
+| Mr.Amar    |         3000 |
+| Mrs. Sonu  |         2000 |
++------------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT vname,MIN(payment) From visitor GROUP BY vname HAVING vname IN('Mrs.Snehal','Mrs.Harshu');
++------------+--------------+
+| vname      | MIN(payment) |
++------------+--------------+
+| Mrs.Harshu |         7000 |
++------------+--------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT Address FROM booking ORDER BY Address ASC;
++---------+
+| Address |
++---------+
+| Mumbai  |
+| Mumbai  |
+| Mumbai  |
+| Nashik  |
+| Pune    |
++---------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT Address FROM booking ORDER BY Address DESC;
++---------+
+| Address |
++---------+
+| Pune    |
+| Nashik  |
+| Mumbai  |
+| Mumbai  |
+| Mumbai  |
++---------+
+5 rows in set (0.00 sec)
+
+mysql> ALTER TABLE security ADD Issue Integer(6);
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> select * from security;
++------+-----------+---------+---------+-------+
+| sid  | s_Type    | Address | sName   | Issue |
++------+-----------+---------+---------+-------+
+|   20 | Part time | Gondia  | Pushpak |  NULL |
+|   21 | Full time | Nashik  | Rohan   |  NULL |
+|   22 | Part time | pune    | Neha    |  NULL |
+|   23 | Full time | Mumbai  | Janvi   |  NULL |
+|   24 | Part time | Delhi   | Soham   |  NULL |
++------+-----------+---------+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> UPDATE security SET Issue = 5;
+Query OK, 5 rows affected (0.00 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> select * from security;
++------+-----------+---------+---------+-------+
+| sid  | s_Type    | Address | sName   | Issue |
++------+-----------+---------+---------+-------+
+|   20 | Part time | Gondia  | Pushpak |     5 |
+|   21 | Full time | Nashik  | Rohan   |     5 |
+|   22 | Part time | pune    | Neha    |     5 |
+|   23 | Full time | Mumbai  | Janvi   |     5 |
+|   24 | Part time | Delhi   | Soham   |     5 |
++------+-----------+---------+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> UPDATE security SET Issue = 5;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 5  Changed: 0  Warnings: 0
+
+mysql> UPDATE security SET Issue = 3 WHERE Address = 'Nashik';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE security SET Issue = 3 WHERE Address = 'Pune';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> DELETE FROM visitor WHERE Author='Mrs.Snehal';
+ERROR 1054 (42S22): Unknown column 'Author' in 'where clause'
+mysql> DELETE FROM visitor WHERE vname='Mrs.Snehal';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from visitor;
++------+------------+------------------+--------+---------+
+| vid  | vname      | email            | mno    | payment |
++------+------------+------------------+--------+---------+
+| 1001 | Manu       | snehu@gmail.com  | 986068 |    5000 |
+| 1002 | Mr.Prasad  | prasad@gmail.com | 906740 |    6000 |
+| 1003 | Mrs.Harshu | harshu@gmail.com | 900900 |    7000 |
+| 1004 | Mr.Amar    | amar@gmail.com   | 900800 |    3000 |
+| 1005 | Mrs. Sonu  | sonu@gmail.com   | 908070 |    2000 |
++------+------------+------------------+--------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select * from security;
++------+-----------+---------+---------+-------+
+| sid  | s_Type    | Address | sName   | Issue |
++------+-----------+---------+---------+-------+
+|   20 | Part time | Gondia  | Pushpak |     5 |
+|   21 | Full time | Nashik  | Rohan   |     3 |
+|   22 | Part time | pune    | Neha    |     3 |
+|   23 | Full time | Mumbai  | Janvi   |     5 |
+|   24 | Part time | Delhi   | Soham   |     5 |
++------+-----------+---------+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> Create table Admin(aid integer(10),aname varchar(15),pwd integer(15));
+Query OK, 0 rows affected, 2 warnings (0.03 sec)
+
+mysql> desc Admin;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| aid   | int         | YES  |     | NULL    |       |
+| aname | varchar(15) | YES  |     | NULL    |       |
+| pwd   | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT INTO Admin(aid,aname,pwd)VALUES(54321,'Snehal',8568952);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Admin(aid,aname,pwd)VALUES(54321,'Prasad',808765492);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Admin(aid,aname,pwd)VALUES(54321,'Shree',645872);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Admin(aid,aname,pwd)VALUES(54321,'Prasann',4687386);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from Admin;
++-------+---------+-----------+
+| aid   | aname   | pwd       |
++-------+---------+-----------+
+| 54321 | Snehal  |   8568952 |
+| 54321 | Prasad  | 808765492 |
+| 54321 | Shree   |    645872 |
+| 54321 | Prasann |   4687386 |
++-------+---------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT sid FROM security UNION SELECT aid FROM Admin;
++-------+
+| sid   |
++-------+
+|    20 |
+|    21 |
+|    22 |
+|    23 |
+|    24 |
+| 54321 |
++-------+
+6 rows in set (0.00 sec)
+
+
+

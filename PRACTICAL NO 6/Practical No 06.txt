@@ -1,0 +1,178 @@
+Practical No 06
+Problem Statement :- Write a PLSQL block of code using parameterized cursor that will merge 
+the data available in the newly created table.
+
+
+Submitted By :- Snehal Ganesh Dahake
+Roll No      :- 71
+
+
+show databases;
+
+use museum;
+
+
+create table old_visitor(
+    vid INT AUTO_INCREMENT PRIMARY KEY,
+    vname VARCHAR(20),
+    payment INT
+) ; 
+
+
+insert into old_visitor( vname , payment ) values
+( 'Snehal' ,1200) , 
+( 'Prasad' , 4561 ) , 
+( 'Ayush' , 1230 ) , 
+( 'Swaraj' , 9990 ) , 
+( 'Advait' , 78890 ) ;
+
+
+create table new_visitor(
+    vid INT AUTO_INCREMENT PRIMARY KEY,
+    vname VARCHAR(20),
+    payment INT
+) ; 
+
+
+
+delimiter $$
+create procedure add_visitor( in visitor_id int )
+begin
+
+declare usrid_2 int;
+declare exit_loop boolean;
+
+declare c1 cursor for select vid from old_visitor where vid > visitor_id;
+declare continue handler for not found set exit_loop = true;
+
+open c1;
+usr_loop: loop
+fetch c1 into usrid_2;
+if not exists (select * from new_employees where vid = usrid_2) then
+insert into new_visitor select * from old_visitor where vid = usrid_2;
+end if;
+
+if exit_loop then
+close c1;
+leave usr_loop;
+end if;
+end loop usr_loop;
+
+end 
+$$
+delimiter ;
+
+
+select * from old_visitor;
+
+select * from new_visitor;
+
+
+
+
+
+
+-------------------------PRACTICAL NO 6-------------------------
+
+
+
+
+Enter password: *********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 8.1.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| collage            |
+| emp                |
+| employee           |
+| hostel             |
+| information_schema |
+| museum             |
+| mysql              |
+| performance_schema |
+| snehal             |
+| student            |
+| sys                |
+| visitor            |
++--------------------+
+12 rows in set (0.01 sec)
+
+mysql> use museum;
+Database changed
+mysql> create table old_visitor(
+    ->     vid INT AUTO_INCREMENT PRIMARY KEY,
+    ->     vname VARCHAR(20),
+    ->     payment INT
+    -> ) ;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into old_visitor( vname , payment ) values
+    -> ( 'Snehal' ,1200) ,
+    -> ( 'Prasad' , 4561 ) ,
+    -> ( 'Ayush' , 1230 ) ,
+    -> ( 'Swaraj' , 9990 ) ,
+    -> ( 'Advait' , 78890 ) ;
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> create table new_visitor(
+    ->     vid INT AUTO_INCREMENT PRIMARY KEY,
+    ->     vname VARCHAR(20),
+    ->     payment INT
+    -> ) ;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> delimiter $$
+mysql> create procedure add_visitor( in visitor_id int )
+    -> begin
+    ->
+    -> declare usrid_2 int;
+    -> declare exit_loop boolean;
+    ->
+    -> declare c1 cursor for select vid from old_visitor where vid > visitor_id;
+    -> declare continue handler for not found set exit_loop = true;
+    ->
+    -> open c1;
+    -> usr_loop: loop
+    -> fetch c1 into usrid_2;
+    -> if not exists (select * from new_employees where vid = usrid_2) then
+    -> insert into new_visitor select * from old_visitor where vid = usrid_2;
+    -> end if;
+    ->
+    -> if exit_loop then
+    -> close c1;
+    -> leave usr_loop;
+    -> end if;
+    -> end loop usr_loop;
+    ->
+    -> end
+    -> $$
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter ;
+mysql> select * from old_visitor;
++-----+--------+---------+
+| vid | vname  | payment |
++-----+--------+---------+
+|   1 | Snehal |    1200 |
+|   2 | Prasad |    4561 |
+|   3 | Ayush  |    1230 |
+|   4 | Swaraj |    9990 |
+|   5 | Advait |   78890 |
++-----+--------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select * from new_visitor;
+Empty set (0.01 sec)

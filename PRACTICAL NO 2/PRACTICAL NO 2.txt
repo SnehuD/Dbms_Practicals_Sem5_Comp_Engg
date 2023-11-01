@@ -1,0 +1,334 @@
+Problem Statement :- Design and develop DB using various SQL objects like Tables, Views, Index, Sequence,Synonym on sample DB.
+
+Submitted By :- Snehal Ganesh Dahake
+Roll No      :- 71
+
+
+
+show databases;
+
+create database museum;
+
+show databases;
+
+use museum;
+
+create table visitor 
+(vid int(6),vname varchar(20) not null ,country varchar(20) not null ,mno int(10),addr varchar(100));
+
+
+alter table visitor modify vid int(6) primary key;
+
+desc visitor;
+
+alter table visitor modify country varchar(25);
+
+desc visitor;
+
+
+create table booking 
+(bid int(5) primary key , slotid int(5), loc varchar(10));
+
+desc booking;
+
+create table visitor1 
+(vname varchar(20),vid int(3),check(vid>100));
+
+ALTER TABLE visitor ADD gender varchar(10);
+
+alter table visitor drop column gender;
+
+desc visitor;
+
+insert into visitor 
+values(101,'Snehal','India',9860684680,'Alandi');
+
+insert into visitor 
+values(102,'Prasad','India',9067404012,'Vishrantwadi');
+
+select * from visitor;
+
+truncate table visitor;
+
+drop table booking;
+
+select * from visitor;
+
+insert into visitor 
+values(101,'Snehal','India',986068,'Alandi');
+
+insert into visitor 
+values(102,'Prasad','India',906740,'Vishrantwadi');
+
+select * from visitor;
+
+create view visitorview as select * from visitor where country='India'; 
+
+select * from visitorview;
+
+create view visitorview2 as select vid,vname,mno from visitor;
+
+select * from visitorview2;
+
+insert into visitorview 
+values(103,'Harshu','USA', 909090, 'Pune');
+
+select * from visitorview;
+
+select * from visitor;
+
+insert into visitorview2 
+values(104,'Amar',808080);
+
+select * from visitorview2;
+
+select * from visitor;
+
+drop view visitorview;
+
+drop view visitorview2;
+
+select * from visitorview;
+
+
+
+
+
+
+
+-------------------------PRACTICAL NO 2-------------------------
+
+
+
+Enter password: *********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 8.1.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| collage            |
+| emp                |
+| employee           |
+| hostel             |
+| information_schema |
+| mysql              |
+| performance_schema |
+| student            |
+| sys                |
+| visitor            |
++--------------------+
+10 rows in set (0.01 sec)
+
+mysql> create database museum;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| collage            |
+| emp                |
+| employee           |
+| hostel             |
+| information_schema |
+| museum             |
+| mysql              |
+| performance_schema |
+| student            |
+| sys                |
+| visitor            |
++--------------------+
+11 rows in set (0.00 sec)
+
+mysql> use museum;
+Database changed
+mysql> create table visitor
+    -> (vid int(6),vname varchar(20) not null ,country varchar(20) not null ,mno int(10),addr varchar(100));
+Query OK, 0 rows affected, 2 warnings (0.03 sec)
+
+mysql> alter table visitor modify vid int(6) primary key;
+Query OK, 0 rows affected, 1 warning (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> desc visitor;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| vid     | int          | NO   | PRI | NULL    |       |
+| vname   | varchar(20)  | NO   |     | NULL    |       |
+| country | varchar(20)  | NO   |     | NULL    |       |
+| mno     | int          | YES  |     | NULL    |       |
+| addr    | varchar(100) | YES  |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+5 rows in set (0.02 sec)
+
+mysql> alter table visitor modify country varchar(25);
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc visitor;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| vid     | int          | NO   | PRI | NULL    |       |
+| vname   | varchar(20)  | NO   |     | NULL    |       |
+| country | varchar(25)  | YES  |     | NULL    |       |
+| mno     | int          | YES  |     | NULL    |       |
+| addr    | varchar(100) | YES  |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> create table booking
+    -> (bid int(5) primary key , slotid int(5), loc varchar(10));
+Query OK, 0 rows affected, 2 warnings (0.02 sec)
+
+mysql> desc booking;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| bid    | int         | NO   | PRI | NULL    |       |
+| slotid | int         | YES  |     | NULL    |       |
+| loc    | varchar(10) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> create table visitor1
+    -> (vname varchar(20),vid int(3),check(vid>100));
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> ALTER TABLE visitor ADD gender varchar(10);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table visitor drop column gender;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc visitor;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| vid     | int          | NO   | PRI | NULL    |       |
+| vname   | varchar(20)  | NO   |     | NULL    |       |
+| country | varchar(25)  | YES  |     | NULL    |       |
+| mno     | int          | YES  |     | NULL    |       |
+| addr    | varchar(100) | YES  |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+
+mysql> insert into visitor
+    -> values(101,'Snehal','India',986068,'Alandi');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into visitor
+    -> values(102,'Prasad','India',906740,'Vishrantwadi');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from visitor;
++-----+--------+---------+--------+--------------+
+| vid | vname  | country | mno    | addr         |
++-----+--------+---------+--------+--------------+
+| 101 | Snehal | India   | 986068 | Alandi       |
+| 102 | Prasad | India   | 906740 | Vishrantwadi |
++-----+--------+---------+--------+--------------+
+2 rows in set (0.00 sec)
+
+mysql> create view visitorview as select * from visitor where country='India';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from visitorview;
++-----+--------+---------+--------+--------------+
+| vid | vname  | country | mno    | addr         |
++-----+--------+---------+--------+--------------+
+| 101 | Snehal | India   | 986068 | Alandi       |
+| 102 | Prasad | India   | 906740 | Vishrantwadi |
++-----+--------+---------+--------+--------------+
+2 rows in set (0.00 sec)
+
+mysql> create view visitorview2 as select vid,vname,mno from visitor;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from visitorview2;
++-----+--------+--------+
+| vid | vname  | mno    |
++-----+--------+--------+
+| 101 | Snehal | 986068 |
+| 102 | Prasad | 906740 |
++-----+--------+--------+
+2 rows in set (0.00 sec)
+
+mysql> insert into visitorview
+    -> values(103,'Harshu','USA', 909090, 'Pune');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from visitorview;
++-----+--------+---------+--------+--------------+
+| vid | vname  | country | mno    | addr         |
++-----+--------+---------+--------+--------------+
+| 101 | Snehal | India   | 986068 | Alandi       |
+| 102 | Prasad | India   | 906740 | Vishrantwadi |
++-----+--------+---------+--------+--------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from visitor;
++-----+--------+---------+--------+--------------+
+| vid | vname  | country | mno    | addr         |
++-----+--------+---------+--------+--------------+
+| 101 | Snehal | India   | 986068 | Alandi       |
+| 102 | Prasad | India   | 906740 | Vishrantwadi |
+| 103 | Harshu | USA     | 909090 | Pune         |
++-----+--------+---------+--------+--------------+
+3 rows in set (0.00 sec)
+
+
+mysql> insert into visitorview2
+    -> values(104,'Amar',808080);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from visitorview2;
++-----+--------+--------+
+| vid | vname  | mno    |
++-----+--------+--------+
+| 101 | Snehal | 986068 |
+| 102 | Prasad | 906740 |
+| 103 | Harshu | 909090 |
+| 104 | Amar   | 808080 |
++-----+--------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select * from visitor;
++-----+--------+---------+--------+--------------+
+| vid | vname  | country | mno    | addr         |
++-----+--------+---------+--------+--------------+
+| 101 | Snehal | India   | 986068 | Alandi       |
+| 102 | Prasad | India   | 906740 | Vishrantwadi |
+| 103 | Harshu | USA     | 909090 | Pune         |
+| 104 | Amar   | NULL    | 808080 | NULL         |
++-----+--------+---------+--------+--------------+
+4 rows in set (0.00 sec)
+
+mysql> drop view visitorview;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> drop view visitorview2;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from visitorview;
+ERROR 1146 (42S02): Table 'museum.visitorview' doesn't exist
+mysql>
+
+
+
+

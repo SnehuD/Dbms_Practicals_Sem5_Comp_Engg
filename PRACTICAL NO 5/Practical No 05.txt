@@ -1,0 +1,197 @@
+Practical No 05
+Problem Statement :- PL SQL stored procedure and stored function.
+
+
+Submitted By :- Snehal Ganesh Dahake
+Roll no      :- 71
+
+
+
+
+
+create table student_marks(
+    name varchar(20),
+    marks int
+) ; 
+
+create table result(
+    name varchar(20),
+    rollno int,
+    class varchar(20)
+) ;
+
+
+
+insert into student_marks(name, marks)
+values ('Snehal' , 1000) , 
+( 'Prasad' , 990 ) , 
+( 'Kaustubh' , 850 ) , 
+( 'Swaraj' , 1200 ) , 
+( 'Chinmay' , 1300 ) ; 
+
+insert into result(name, class) 
+values ( 'Snehal' , '' ) , 
+( 'Prasad' , '' ) , 
+( 'Kaustubh' , '' ) , 
+( 'Swaraj' , '' ) , 
+( 'Chinmay' , '' ) ; 
+
+
+
+
+delimiter $$
+create procedure proc_grade(in name varchar(20))
+begin
+
+declare n varchar(20);
+declare m int;
+declare category varchar(20) ;
+
+set n = name;
+select marks into m from student_marks where student_marks.name = n;
+
+if m >= 990 and m <= 1500 then
+    set category = 'distinction';
+elseif m >= 989 and m < 990 then
+    set category = 'first_class';
+elseif m >= 825 and m <= 899 then
+    set category = 'high second class';
+end if;
+
+update result set class = category where result.name = n;
+
+end
+$$
+delimiter ;
+
+
+select * from student_marks;
+
+select * from result;
+
+
+
+
+
+
+-------------------------PRACTICAL NO 5-------------------------
+
+Enter password: *********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.1.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| collage            |
+| emp                |
+| employee           |
+| hostel             |
+| information_schema |
+| museum             |
+| mysql              |
+| performance_schema |
+| snehal             |
+| student            |
+| sys                |
+| visitor            |
++--------------------+
+12 rows in set (0.01 sec)
+
+mysql> create database student;
+ERROR 1007 (HY000): Can't create database 'student'; database exists
+mysql> use student;
+Database changed
+mysql> create table student_marks(
+    ->     name varchar(20),
+    ->     marks int
+    -> ) ;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create table result(
+    ->     name varchar(20),
+    ->     rollno int,
+    ->     class varchar(20)
+    -> ) ;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into student_marks(name, marks)
+    -> values ('Snehal' , 1000) ,
+    -> ( 'Prasad' , 990 ) ,
+    -> ( 'Kaustubh' , 850 ) ,
+    -> ( 'Swaraj' , 1200 ) ,
+    -> ( 'Chinmay' , 1300 ) ;
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> insert into result(name, class)
+    -> values ( 'Snehal' , '' ) ,
+    -> ( 'Prasad' , '' ) ,
+    -> ( 'Kaustubh' , '' ) ,
+    -> ( 'Swaraj' , '' ) ,
+    -> ( 'Chinmay' , '' ) ;
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> delimiter $$
+mysql> create procedure proc_grade(in name varchar(20))
+    -> begin
+    ->
+    -> declare n varchar(20);
+    -> declare m int;
+    -> declare category varchar(20) ;
+    ->
+    -> set n = name;
+    -> select marks into m from student_marks where student_marks.name = n;
+    ->
+    -> if m >= 990 and m <= 1500 then
+    ->     set category = 'distinction';
+    -> elseif m >= 989 and m < 990 then
+    ->     set category = 'first_class';
+    -> elseif m >= 825 and m <= 899 then
+    ->     set category = 'high second class';
+    -> end if;
+    -> update result set class = category where result.name = n;
+    ->
+    -> end
+    -> $$
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter ;
+mysql> select *from student_marks;
++----------+-------+
+| name     | marks |
++----------+-------+
+| Snehal   |  1000 |
+| Prasad   |   990 |
+| Kaustubh |   850 |
+| Swaraj   |  1200 |
+| Chinmay  |  1300 |
++----------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from result;
++----------+--------+-------+
+| name     | rollno | class |
++----------+--------+-------+
+| Snehal   |   NULL |       |
+| Prasad   |   NULL |       |
+| Kaustubh |   NULL |       |
+| Swaraj   |   NULL |       |
+| Chinmay  |   NULL |       |
++----------+--------+-------+
+5 rows in set (0.00 sec)
+
+mysql>
+
+

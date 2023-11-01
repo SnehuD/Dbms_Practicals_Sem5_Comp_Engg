@@ -1,0 +1,155 @@
+Practical No - 07
+
+Problem Statement:- Write a database trigger on library table.
+The system should keep track of the records that are being updated or deleted.
+The old value of updated or deleted records should be added in library audit table.
+
+
+
+Submitted By :- Snehal Ganesh Dahake
+Roll No      :- 71
+
+
+
+show databases;
+
+create database library;
+
+use library;
+
+create table library(
+    id int auto_increment primary key,
+    name varchar(20) , 
+    price int
+) ;
+
+
+create table audit(
+    id int auto_increment primary key,
+    name varchar(20) , 
+    price int
+) ;
+
+
+insert into library(name,price) 
+values ('SPOS' , 100) , 
+('CN' , 200) , 
+('DELD' , 300) , 
+('DBMS' , 100) , 
+('BXE' , 900) , 
+('DS' , 1200) ;
+
+
+create trigger audit_deleted_trigger 
+before delete on library 
+for each row 
+insert into audit values(old.id, old.name, old.price);
+
+create trigger audit_updated_trigger 
+before update on library 
+for each row 
+insert into audit values(old.id, old.name, old.price);
+
+select * from library;
+
+select * from audit;
+
+
+
+
+
+-------------------------PRACTICAL NO 7-------------------------
+
+
+
+Enter password: *********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 8.1.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| collage            |
+| emp                |
+| employee           |
+| hostel             |
+| information_schema |
+| museum             |
+| mysql              |
+| performance_schema |
+| snehal             |
+| student            |
+| sys                |
+| visitor            |
++--------------------+
+12 rows in set (0.00 sec)
+
+mysql> create database library;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use library;
+Database changed
+mysql> create table library(
+    ->     id int auto_increment primary key,
+    ->     name varchar(20) ,
+    ->     price int
+    -> ) ;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create table audit(
+    ->     id int auto_increment primary key,
+    ->     name varchar(20) ,
+    ->     price int
+    -> ) ;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into library(name,price)
+    -> values ('SPOS' , 100) ,
+    -> ('CN' , 200) ,
+    -> ('DELD' , 300) ,
+    -> ('DBMS' , 100) ,
+    -> ('BXE' , 900) ,
+    -> ('DS' , 1200) ;
+Query OK, 6 rows affected (0.01 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> create trigger audit_deleted_trigger
+    -> before delete on library
+    -> for each row
+    -> insert into audit values(old.id, old.name, old.price);
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create trigger audit_updated_trigger
+    -> before update on library
+    -> for each row
+    -> insert into audit values(old.id, old.name, old.price);
+Query OK, 0 rows affected (0.01 sec)
+
+
+mysql> select * from library;
++----+------+-------+
+| id | name | price |
++----+------+-------+
+|  1 | SPOS |   100 |
+|  2 | CN   |   200 |
+|  3 | DELD |   300 |
+|  4 | DBMS |   100 |
+|  5 | BXE  |   900 |
+|  6 | DS   |  1200 |
++----+------+-------+
+6 rows in set (0.00 sec)
+
+mysql> select * from audit;
+Empty set (0.00 sec)
+
+mysql>
